@@ -20,7 +20,20 @@ class WordAnalyzer:
             translation = str.maketrans('','', string.punctuation)
 
             file_open = self._filepath.open()
+
+            for line in file_open:
+                line = line.translate(translation).lower()
+                words = line.split()
+                for word in words:
+                    if word in self._frequiences:
+                        self._frequiences[words] += 1
+                    else:
+                        self._frequiences[words] = 1
             
         except  FileNotFoundError:
             return False
+    
+    def print_report(self):
+        for word in sorted(self._frequiences.keys()):
+            print(f'{word}. {self._frequiences[word]}')
 
