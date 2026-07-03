@@ -9,11 +9,14 @@ import string
     Date: July 1st , 2026
 """
 class WordAnalyzer:
+    """Analyzes a text file and counts word frequencies."""
     def __init__(self,filepath):
+        """Initialize the filepath and empty frequency dictionary."""
         self._filepath = pathlib.Path(filepath)
         self._frequiences = {}
 
     def process_file(self):
+        """Read the file, clean punctuation, lowercase words, and count frequencies."""
         try:
             if not self._filepath.exists():
                 raise FileNotFoundError
@@ -37,10 +40,12 @@ class WordAnalyzer:
             return False
     
     def print_report(self):
+        """Print the words and counts in alphabetical order."""
         for word in sorted(self._frequiences.keys()):
-            print(f'{word}. {self._frequiences[word]}')
+            print(f'{word} :: {self._frequiences[word]}')
 
 def main():
+    """Display menu, get user choice, and run the word analyzer."""
     files = {
     "1": pathlib.Path("princess_mars.txt"),
     "2": pathlib.Path("Tarzan.txt"),
